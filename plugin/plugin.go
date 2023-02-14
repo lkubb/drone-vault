@@ -44,7 +44,7 @@ func (p *plugin) Find(ctx context.Context, req *secret.Request) (*drone.Secret, 
 	// to retrieve the secret at the requested path.
 	params, err := p.find(path)
 	if err != nil {
-		return nil, errors.New("secret not found")
+		return nil, fmt.Errorf("error found retrieving secret: %w", err)
 	}
 	value, ok := matchCaseInsensitive(name, params)
 	if !ok {
